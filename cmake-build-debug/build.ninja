@@ -84,6 +84,12 @@ build CMakeFiles/testapp.dir/my_class.cpp.o: CXX_COMPILER__testapp_Debug /Users/
   OBJECT_DIR = CMakeFiles/testapp.dir
   OBJECT_FILE_DIR = CMakeFiles/testapp.dir
 
+build CMakeFiles/testapp.dir/arr_fiddling.cpp.o: CXX_COMPILER__testapp_Debug /Users/hannah/CLionProjects/testapp/arr_fiddling.cpp || cmake_object_order_depends_target_testapp
+  DEP_FILE = CMakeFiles/testapp.dir/arr_fiddling.cpp.o.d
+  FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk -std=gnu++14
+  OBJECT_DIR = CMakeFiles/testapp.dir
+  OBJECT_FILE_DIR = CMakeFiles/testapp.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target testapp
@@ -92,7 +98,7 @@ build CMakeFiles/testapp.dir/my_class.cpp.o: CXX_COMPILER__testapp_Debug /Users/
 #############################################
 # Link the executable testapp
 
-build testapp: CXX_EXECUTABLE_LINKER__testapp_Debug CMakeFiles/testapp.dir/main.cpp.o CMakeFiles/testapp.dir/my_class.cpp.o
+build testapp: CXX_EXECUTABLE_LINKER__testapp_Debug CMakeFiles/testapp.dir/main.cpp.o CMakeFiles/testapp.dir/my_class.cpp.o CMakeFiles/testapp.dir/arr_fiddling.cpp.o
   FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.1.sdk
   OBJECT_DIR = CMakeFiles/testapp.dir
   POST_BUILD = :
