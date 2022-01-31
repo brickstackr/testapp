@@ -4,7 +4,7 @@ namespace N
     class arr_doodle
     {
     public:
-        void arr_fiddling();
+        int arr_fiddling();
     };
 
 }
