@@ -1,20 +1,29 @@
 // my_class.cpp
 #include "my_class.h" // header in local directory
 #include "array_fiddling.h"
-#include <iostream> // header in standard library
+#include <iostream>
 #include <fstream>
-#include <string>
 #include <vector>
+using namespace std;
+using namespace N;
 
-using std::cout; using std::cerr;
-using std::endl; using std::string;
-using std::ifstream; using std::vector;
+int N::arr_doodle::arr_fiddling(){
+    ofstream out("output.txt", ios::binary);
+    ifstream in("faketext.txt", ios::binary);
 
-int N::arr_doodle::arr_fiddling() {
-    std::string s; //string
-    std::fstream f; //file stream
-    f.open("faketext.txt"); //open your word list
-    std::getline(f, s); //get line from f (your word list) and put it in s (the string)
-    std::cout << s << "\n"; //output string
-    return 0;
+    vector<ios::pos_type> pos;
+    pos.push_back(0);
+
+    string line;
+    while (getline(in, line))
+        pos.push_back(in.tellg());
+
+    size_t i = pos.size();
+    if (i-- > 0)
+        while (i-- > 0) {
+            in.clear();
+            in.seekg(pos[i]);
+            getline(in, line);
+            out << line << '\n';
+        }
 }
