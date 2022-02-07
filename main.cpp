@@ -15,103 +15,98 @@ using namespace std;
 
 
 
-/* C++ program to implement basic stack
-operations */
+/* C++ program to implement a queue */
 
-// using namespace std;
-
-#define SIZE 1000
-
-class stk {
-    int stack[SIZE];
-    int top;
-
-public:
-    void push();
-
-    int pop();
-
-    void display();
-
-    stk() { top = -1; }
-};
-
-void stk::push() // push function def
-{
-    int item;
-    if (top == (SIZE - 1)) {
-        cout << "Stack Overflow \n";
-    }
-    else {
-        cout << "Enter element to push: \n";
-        cin>>item;
-        top=top+1;
-        stack[top]=item;
-    }
-}
-
-int stk::pop()
-{
-    int temp;
-    if (top==-1) {
-        cout << "Empty stack \n";
-        return 0;
-    }
-    else {
-        temp=stack[top];
-        top=top-1;
-    }return(temp);
-}
-void stk::display()
-{
-    if(top==-1)
-        cout<<"stack empty\n";
-    else
+struct Queue {
+    int front, rear, capacity;
+    int* queue;
+    Queue(int c)
     {
-        for (int i=top; i>0; i--)
+        front = rear = 0;
+        capacity = c;
+        queue = new int;
+    }
+    ~Queue() { delete[] queue;}
+    // function to insert an element at the rear of the queue
+    void queueEnqueue(int data)
+    {
+        // check queue is full or not
+        if (capacity == rear) {
+            printf("\nQueue is full\n");
+            return;
+        }
+        // insert element at the rear
+        else {
+            queue[rear] = data;
+            rear++;
+        }
+        return;}
+        // function to delete an element
+        // from the front of the queue
+        void queueDequeue()
         {
-            cout<<"Elements are:\t";
-            cout<<stack[i];
+            //if the queue is empty
+            if (front == rear) {
+                printf("\nQueue is empty\n");
+                return;
+            }
+            //shift all the elements from index 2 till rear
+            // to the left by one
+            else {
+                for (int i = 0; i < rear - 1; i++) {
+                    queue[i] = queue[i+1];
+                }
+                // decrement rear
+                rear--;
+            }
+            return;
         }
-    }cout<<endl;
-}
-
-int main(){
-
-    int option=0;
-    stk s;
-    int element;
-    while(1)
+        void queueDisplay()
+        {
+            int i;
+            if (front ==rear) {
+                printf("\nQueue is Empty\n");
+                return;
+            }
+            for (i = front; i < rear; i++) {
+                printf(" %d <-- ", queue[i]);
+            }
+            return;
+        }
+        // print front of queue
+        void queueFront()
+        {
+            if (front ==rear) {
+                printf("\nQueue is Empty\n");
+                return;
+            }
+            printf("\nFront Element is: %d", queue[front]);
+            return;
+        }
+    };
+    //Driver code
+    int main(void)
     {
-        cout<<" ---------------------------------\n";
-        cout<<"enter 1 to push:\nenter 2 for pop:\n";
-        cout<<"enter 3 for display:\nenter 4 for exit\n";
-        cout<<" ---------------------------------\n";
+        // Create a queue of capacity 4
+        Queue q(4);
+        // print Queue elements
+        q.queueDisplay();
+        // insert elements into queue
+        q.queueEnqueue(20);
+        q.queueEnqueue(30);
+        q.queueEnqueue(40);
+        q.queueEnqueue(50);
+        q.queueDisplay();
+        q.queueEnqueue(60);
+        q.queueDisplay();
+        q.queueDequeue();
+        q.queueDequeue();
+        printf("\n\n after two node deletion\n\n");
+        //print queue elements
+        q.queueDisplay();
+        //print front of queue
+        q.queueFront();
+        return 0;
 
-        cout<<"Enter option: \n";
-        cin>>option;
 
-        switch(option){
-            case 1:
-                s.push();
-                break;
-            case 2:
-                element=s.pop();
-                cout<<" ----  successful    ----";
-                cout<<"popped element is= "<<element<<endl;
-                break;
-            case 3:
-                s.display();
-                break;
-            case 4:
-                exit(0);
-            default:
-                cout<<"wrong choice\n";
-                break;
-        }
     }
-
-    getchar();
-    return 0;
-
-}
